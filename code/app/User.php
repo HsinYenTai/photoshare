@@ -11,7 +11,6 @@ class User extends Authenticatable
     use Notifiable;
     use SoftDeletes;
 
-    protected $table = 'user';
     /**
      * @var array
      */

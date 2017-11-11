@@ -9,7 +9,6 @@ class Watch extends Model
 {
     use SoftDeletes;
     //
-    protected $table = 'watch';
     /**
      * 应该被调整为日期的属性
      *

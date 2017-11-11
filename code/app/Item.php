@@ -9,7 +9,6 @@ class Item extends Model
 {
     use SoftDeletes;
     //
-    protected $table = 'item';
     /**
      * 应该被调整为日期的属性
      *

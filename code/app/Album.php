@@ -10,7 +10,6 @@ class Album extends Model
     use SoftDeletes;
 
     //
-    protected $table = 'album';
     /**
      * 应该被调整为日期的属性
      *

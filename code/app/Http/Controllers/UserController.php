@@ -11,70 +11,63 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
+use Illuminate\Validation\ValidationException;
+use Mockery\Exception;
 
 class UserController extends Controller
 {
 
-    /**
-     * @param Request $request
-     */
-    public function login(Request $request)
-    {
+    public function getLogin(Request $request) {
+        return View::make('user.login');
+    }
+
+    public function postLogin(Request $request) {
         dump($request);
+
         $data = $request->all();
-        $this->validator($data)->validate();
-        $username = $data['username'];
-        $email = $data['email'];
-        $password = $data['password'];
-
-        if ($username)
-        {
-            $user = User::where('username', $username)->firstOrFail();
-        }
-        else
-        {
+        try {
+            $this->validator($data)->validate();
+            $email = $data['email'];
+            $password = $data['password'];
             $user = User::where('email', $email)->firstOrFail();
-        }
-        if ($user) {
-            if ($user->password==$password)
-            {
-
+            if ($user) {
+                if ($user->password==$password) {
+                    dump("right");
+                }
             }
-            else
-            {
+            dump("failed");
+            return $this->getLogin($request);
 
-            }
-        }
-        else
-        {
-
+        } catch (ValidationException $e) {
+            return $this->getLogin($request);
         }
     }
 
     public function logout(Request $request) {
-        dump($request);
         $request->session()->forget('reset');
     }
 
     public function register(Request $request) {
-        dump($request);
         $data = $request->all();
         $this->validator($data)->validate();
         User::created($data);
     }
 
+    public function getRegister(Request $request) {
+        return View::make('user.register');
+    }
+
     /**
      * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param array $data
+     * @return mixed
      */
-    protected function validator(array $data, $required = 'required|')
+    protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => $required . 'string|max:255',
-            'email' => $required . 'string|email|max:255|unique:users',
-            'password' => $required . 'string|min:6|confirmed',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -86,11 +79,10 @@ class UserController extends Controller
     }
 
     public function resetPassword(Request $request) {
-        dump($request);
+
     }
 
     public function delete(Request $request) {
-        dump($request);
         $user = User::find($request->session()->get('id'));
         $user->softDeletes();
     }

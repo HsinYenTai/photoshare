@@ -10,7 +10,6 @@ class Activity extends Model
     use SoftDeletes;
 
     //
-    protected $table = 'activity';
     /**
      * 应该被调整为日期的属性
      *
