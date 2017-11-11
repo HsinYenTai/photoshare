@@ -22,14 +22,24 @@ class UserController extends Controller
         return View::make('user.login');
     }
 
+    public function avatar($email) {
+
+        $default = "https://bootdey.com/img/Content/avatar/avatar1.png";
+        $size = 40;
+        $avatar_url = "https://www.gravatar.com/avatar/" .
+            md5( strtolower( trim( $email ) ) ) .
+            "?d=" . urlencode( $default ) . "&s=" . $size;
+        return $avatar_url;
+    }
+
     public function postLogin(Request $request) {
-        dump($request);
 
         $data = $request->all();
         try {
             $this->validator($data)->validate();
             $email = $data['email'];
             $password = $data['password'];
+
             $user = User::where('email', $email)->firstOrFail();
             if ($user) {
                 if ($user->password==$password) {
@@ -48,10 +58,12 @@ class UserController extends Controller
         $request->session()->forget('reset');
     }
 
-    public function register(Request $request) {
+    public function postRegister(Request $request) {
         $data = $request->all();
         $this->validator($data)->validate();
-        User::created($data);
+        $data['avatar'] = $this->avatar($data['email']);
+        (new User)->insert($data);
+
     }
 
     public function getRegister(Request $request) {
@@ -66,7 +78,7 @@ class UserController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }

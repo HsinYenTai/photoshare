@@ -9,6 +9,9 @@
 
 define('LARAVEL_START', microtime(true));
 
+define('USER_KEY', 'USER_KEY');
+define('DEFAULT_USER_ID', 1);
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

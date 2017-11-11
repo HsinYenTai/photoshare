@@ -16,4 +16,15 @@ class Album extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    protected $fillable = ['title', 'description', 'owner_id'];
+
+    public function insert($data) {
+        foreach ($data as $key=>$value) {
+            if (in_array($key, $this->fillable)) {
+                $this->$key = $value;
+            }
+        }
+        $this->save();
+    }
 }

@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','avatar'
     ];
 
     /**
@@ -32,4 +32,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function insert($data) {
+        foreach ($data as $key=>$value) {
+            if (in_array($key, $this->fillable)) {
+                $this->$key = $value;
+            }
+        }
+
+        $this->save();
+    }
+
+
 }

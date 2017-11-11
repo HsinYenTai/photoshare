@@ -38,13 +38,13 @@
                                 <input type="email" name="email" id="email" class="ipt" placeholder="邮箱地址" required>
                             </div>
                             <div class="group-ipt user">
-                                <input type="text" name="user" id="user" class="ipt" placeholder="选择一个用户名" required>
+                                <input type="text" name="name" id="name" class="ipt" placeholder="选择一个用户名" required>
                             </div>
                             <div class="group-ipt password">
                                 <input type="password" name="password" id="password" class="ipt" placeholder="设置登录密码" required>
                             </div>
                             <div class="group-ipt password1">
-                                <input type="password" name="password1" id="password1" class="ipt" placeholder="重复密码" required>
+                                <input type="password" name="password_confirmation" id="password_confirmation" class="ipt" placeholder="重复密码" required>
                             </div>
                             <div class="group-ipt verify">
                                 <input type="text" name="verify" id="verify" class="ipt" placeholder="输入验证码" required>
