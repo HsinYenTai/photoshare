@@ -19,16 +19,17 @@ Route::get('user/login', "UserController@getLogin");
 Route::get('user/postLogin', "UserController@postLogin");
 Route::post('user/login', "UserController@postLogin");
 
-
 Route::get('user/register', "UserController@getRegister");
 Route::get('user/postRegister', "UserController@postRegister");
 Route::post('user/register', "UserController@postRegister");
-
-
 
 Route::any('user/update', "UserController@update");
 Route::any('user/reset', "UserController@resetPassword");
 Route::any('user/delete', "UserController@delete");
 
 Route::any('album/create', 'AlbumController@create');
+
+Route::post('item/save', 'ItemController@save');
+
 Route::any('home/index', 'HomeController@index');
+Route::any('home/dump', 'HomeController@dump');

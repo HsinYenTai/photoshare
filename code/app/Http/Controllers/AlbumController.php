@@ -18,10 +18,11 @@ use Mockery\Exception;
 
 class AlbumController
 {
+
     public function create(Request $request) {
         try {
             $data = $request->all();
-            $data['owner_id'] = $request->session()->get('user_id', '1');
+            $data['owner_id'] = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
             $this->validator($data)->validate();
             (new Album)->insert($data);
             return \redirect()->action('HomeController@index');
@@ -35,6 +36,7 @@ class AlbumController
     {
         return Validator::make($data, [
             'title' => 'required|string|max:255',
+            'label' => 'required|string|max:255',
             'description' => 'required|string|min:6',
             'owner_id' => 'required|integer'
         ]);
@@ -43,7 +45,10 @@ class AlbumController
 
     public function delete(Request $request)
     {
-
+        $album = Album::find($request->get('id'));
+        if ($album && $album->owner_id==$request->session()->get(USER_KEY_ID)) {
+            $album->softDeletes();
+        }
     }
 
     public function modify(Request $request)

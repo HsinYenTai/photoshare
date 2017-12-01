@@ -22,40 +22,37 @@ class UserController extends Controller
         return View::make('user.login');
     }
 
-    public function avatar($email) {
-
-        $default = "https://bootdey.com/img/Content/avatar/avatar1.png";
-        $size = 40;
-        $avatar_url = "https://www.gravatar.com/avatar/" .
-            md5( strtolower( trim( $email ) ) ) .
-            "?d=" . urlencode( $default ) . "&s=" . $size;
-        return $avatar_url;
-    }
-
     public function postLogin(Request $request) {
 
         $data = $request->all();
+
         try {
+
             $this->validator($data)->validate();
             $email = $data['email'];
             $password = $data['password'];
-
             $user = User::where('email', $email)->firstOrFail();
+
             if ($user) {
                 if ($user->password==$password) {
-                    dump("right");
+                    $this->login($request, $user);
+                    return redirect()->action('HomeController@index', $request);
                 }
             }
-            dump("failed");
-            return $this->getLogin($request);
-
+            dump('fail');
         } catch (ValidationException $e) {
-            return $this->getLogin($request);
+            dump($e);
+            exit();
         }
+
+    }
+
+    public function login(Request $request, User $user) {
+        $request->session()->put(USER_KEY_ID, $user->id);
     }
 
     public function logout(Request $request) {
-        $request->session()->forget('reset');
+        $request->session()->forget(USER_KEY_ID);
     }
 
     public function postRegister(Request $request) {
@@ -63,7 +60,7 @@ class UserController extends Controller
         $this->validator($data)->validate();
         $data['avatar'] = $this->avatar($data['email']);
         (new User)->insert($data);
-
+        return $this->postLogin($request);
     }
 
     public function getRegister(Request $request) {
@@ -79,7 +76,7 @@ class UserController extends Controller
     {
         return Validator::make($data, [
             'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
         ]);
     }
 
@@ -95,7 +92,17 @@ class UserController extends Controller
     }
 
     public function delete(Request $request) {
-        $user = User::find($request->session()->get('id'));
+        $user = User::find($request->session()->get(USER_KEY_ID));
         $user->softDeletes();
+    }
+
+    public function avatar($email) {
+
+        $default = "https://bootdey.com/img/Content/avatar/avatar1.png";
+        $size = 40;
+        $avatar_url = "https://www.gravatar.com/avatar/" .
+            md5( strtolower( trim( $email ) ) ) .
+            "?d=" . urlencode( $default ) . "&s=" . $size;
+        return $avatar_url;
     }
 }

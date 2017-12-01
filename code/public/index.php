@@ -9,7 +9,7 @@
 
 define('LARAVEL_START', microtime(true));
 
-define('USER_KEY', 'USER_KEY');
+define('USER_KEY_ID', 'USER_KEY_ID');
 define('DEFAULT_USER_ID', 1);
 
 /*

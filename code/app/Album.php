@@ -17,7 +17,18 @@ class Album extends Model
      */
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['title', 'description', 'owner_id'];
+    protected $fillable = [
+        'title', 'description', 'owner_id', 'label',
+        'background', 'likes', 'comments'
+    ];
+
+    /**
+     * Get the comments for the blog post.
+     */
+    public function items()
+    {
+        return $this->hasMany('App\Item');
+    }
 
     public function insert($data) {
         foreach ($data as $key=>$value) {
@@ -25,6 +36,8 @@ class Album extends Model
                 $this->$key = $value;
             }
         }
+        $this->background = '../images/pic-none.png';
+        $this->likes = 0;
         $this->save();
     }
 }

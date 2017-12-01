@@ -15,4 +15,17 @@ class Item extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    protected $fillable = ['owner_id', 'url', 'album_id', 'description', 'likes'];
+
+    public function insert($data) {
+        foreach ($data as $key=>$value) {
+            if (in_array($key, $this->fillable)) {
+                $this->$key = $value;
+            }
+        }
+        $this->likes = 0;
+        $this->save();
+    }
+
 }
