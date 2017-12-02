@@ -9,12 +9,16 @@
 namespace App\Http\Controllers;
 
 
+use App\Activity;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
     public function save(Request $request) {
-
+        $data = $request->all();
+        $data['owner_id'] = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        (new Activity())->insert($data);
+        return $this->redirectHome();
     }
 
     public function delete(Request $request) {

@@ -9,7 +9,9 @@
 namespace App\Http\Controllers;
 
 
-class WatchController
+class WatchController extends Controller
 {
+    public function watch() {
 
+    }
 }

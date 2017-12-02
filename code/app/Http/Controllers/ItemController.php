@@ -28,7 +28,7 @@ class ItemController extends Controller
         $data['url'] = $saveResult;
         $data['owner_id'] = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
         (new Item())->insert($data);
-        return redirect()->action('HomeController@index');
+        return $this->redirectHome();
     }
 
     private function saveFile(Request $request) {

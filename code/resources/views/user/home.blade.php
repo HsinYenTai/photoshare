@@ -164,11 +164,11 @@
                             <div class="inner-all">
                                 <ul class="list-unstyled">
                                     <li class="text-center">
-                                        <img data-no-retina="" class="img-circle img-responsive img-bordered-primary" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="John Doe">
+                                        <img data-no-retina="" class="img-circle img-responsive img-bordered-primary" src="{{$user->avatar}}" alt="{{$user->name}}">
                                     </li>
                                     <li class="text-center">
-                                        <h4 class="text-capitalize">John Doe</h4>
-                                        <p class="text-muted text-capitalize">web designer</p>
+                                        <h4 class="text-capitalize">{{$user->name}}</h4>
+                                        <p class="text-muted text-capitalize">no description...</p>
                                     </li>
                                     <li>
                                         <a href="" class="btn btn-success text-center btn-block">PRO Account</a>
@@ -199,9 +199,9 @@
                         </div><!-- /.panel-heading -->
                         <div class="panel-body no-padding rounded">
                             <ul class="list-group no-margin">
-                                <li class="list-group-item"><i class="fa fa-envelope mr-5"></i> support@bootdey.com</li>
-                                <li class="list-group-item"><i class="fa fa-globe mr-5"></i> www.bootdey.com</li>
-                                <li class="list-group-item"><i class="fa fa-phone mr-5"></i> +6281 903 xxx xxx</li>
+                                <li class="list-group-item"><i class="fa fa-envelope mr-5"></i> {{$user->email}}</li>
+                                <li class="list-group-item"><i class="fa fa-globe mr-5"></i> no website</li>
+                                <li class="list-group-item"><i class="fa fa-phone mr-5"></i> no phone here</li>
                             </ul>
                         </div><!-- /.panel-body -->
                     </div><!-- /.panel -->

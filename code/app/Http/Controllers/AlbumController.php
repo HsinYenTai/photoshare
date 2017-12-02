@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Validation\ValidationException;
 use Mockery\Exception;
 
-class AlbumController
+class AlbumController extends Controller
 {
 
     public function create(Request $request) {
@@ -25,8 +25,7 @@ class AlbumController
             $data['owner_id'] = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
             $this->validator($data)->validate();
             (new Album)->insert($data);
-            return \redirect()->action('HomeController@index');
-
+            return $this->redirectHome();
         } catch (ValidationException $e) {
             dump($e);
         }

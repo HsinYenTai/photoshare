@@ -17,7 +17,7 @@ use App\Watch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class HomeController
+class HomeController extends Controller
 {
 
 
@@ -28,23 +28,19 @@ class HomeController
         $items = Item::where('owner_id', $user_id)->get();
         $friends = Watch::where('watcher_id', $user_id)->get();
         $friendsId = [];
-        foreach ($friends as $friend) {
-            $friendsId[] = $friend->watched_id;
-        }
+        foreach ($friends as $friend) { $friendsId[] = $friend->watched_id; }
         $recommend = empty($friendsId)? [] : Item::whereIn('owner_id', $friendsId)->take(20)->get();
         $moments = Item::paginate(50);
-        $activities = Activity::all();
-
+        $activities = Activity::where('date', '>=', date('c'))->get(); // 'c' means iso
         $data = [
             'user'=>$user,
             'albums'=>$albums,
             'items'=>$items,
             'activities'=>$activities,
-            'recommend'=>$recommend,
+            'recommends'=>$recommend,
             'moments'=>$moments,
             'friends'=>$friends,
         ];
-        dump($moments);
         return View::make('user.home', $data);
     }
 

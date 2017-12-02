@@ -16,7 +16,16 @@ class Item extends Model
      */
     protected $dates = ['deleted_at'];
 
+
     protected $fillable = ['owner_id', 'url', 'album_id', 'description', 'likes'];
+
+    public function hasManyComments() {
+        return $this->hasMany('App\Comment', 'item_id', 'id');
+    }
+
+    public function belongsToUser() {
+        return $this->belongsTo('App\User', 'owner_id', 'id');
+    }
 
     public function insert($data) {
         foreach ($data as $key=>$value) {

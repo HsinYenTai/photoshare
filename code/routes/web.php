@@ -31,5 +31,8 @@ Route::any('album/create', 'AlbumController@create');
 
 Route::post('item/save', 'ItemController@save');
 
+Route::any('item/comment', 'CommentController@comment');
+Route::any('activity/save', 'ActivityController@save');
+
 Route::any('home/index', 'HomeController@index');
 Route::any('home/dump', 'HomeController@dump');
