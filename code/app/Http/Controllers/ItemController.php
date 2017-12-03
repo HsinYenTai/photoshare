@@ -10,8 +10,10 @@ namespace App\Http\Controllers;
 
 
 use App\Item;
+use App\ItemLike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
 {
@@ -62,9 +64,28 @@ class ItemController extends Controller
 
     }
 
-    public function praise(Request $request)
+    public function like(Request $request)
     {
+        $data = $request->all();
 
+        $user_id = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $item_id = $data['item_id'];
+        $data['user_id'] = $user_id;
+
+        $like = ItemLike::where('user_id', $user_id)
+                        ->where('item_id', $item_id)
+                        ->first();
+
+        if (!$like) {
+            $item = Item::find($item_id);
+
+            if($item) {
+                (new ItemLike())->insert($data);
+                $item->likes += 1;
+                $item->save();
+            }
+        }
+        return $this->redirectHome();
     }
 
     public function comment(Request $request)

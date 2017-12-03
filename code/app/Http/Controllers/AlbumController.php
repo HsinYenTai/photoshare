@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Album;
+use App\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -44,10 +45,13 @@ class AlbumController extends Controller
 
     public function delete(Request $request)
     {
-        $album = Album::find($request->get('id'));
-        if ($album && $album->owner_id==$request->session()->get(USER_KEY_ID)) {
+        $album_id = $request->get('album_id');
+        $album = Album::find($album_id);
+        if ($album && $album->owner_id==$request->session()->get(USER_KEY_ID, DEFAULT_INCLUDE_PATH)) {
             $album->delete();
+            Item::where('album_id', $album_id)->delete();
         }
+        return $this->redirectHome();
     }
 
     public function modify(Request $request)

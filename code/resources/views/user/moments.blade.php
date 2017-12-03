@@ -1,6 +1,6 @@
 <div class="row clearfix tab-pane fade  active in" id="tab-moments">
     <br/>
-    @foreach($items as $item)
+    @foreach($moments as $item)
         <?php
             $user = $item->belongsToUser()->first();
             $comments = $item->hasManyComments()->get() ;
@@ -11,7 +11,7 @@
                 <div class="pull-left half">
                     <div class="media">
                         <div class="media-object pull-left">
-                            <img src="{{$user->avatar}}" alt="..." class="img-circle img-post">
+                            <img src="{{$user->avatar}}" alt="{{$user->name}}" class="img-circle img-post">
                         </div>
                         <div class="media-body">
                             <a href="#" class="media-heading block mb-0 h4 text-white">{{$user->name}}</a>
@@ -20,7 +20,7 @@
                     </div>
                 </div><!-- /.pull-left -->
                 <div class="pull-right">
-                    <a href="#" class="text-white h4"><i class="fa fa-heart"></i> {{$item->likes}}</a>
+                    <a href="../item/like?item_id={{$item->id}}" class="text-white h4"><i class="fa fa-heart"></i> {{$item->likes}}</a>
                 </div><!-- /.pull-right -->
                 <div class="clearfix"></div>
             </div><!-- /.panel-heading -->

@@ -5,8 +5,8 @@
     @endif
     @foreach($recommends as $recommend)
         <?php
-        $user = $recommend->belongsToUser()->first();
-        $comments = $recommend->hasManyComments()->get() ;
+            $user = $recommend->belongsToUser()->first();
+            $comments = $recommend->hasManyComments()->get();
         ?>
         <div class="col-md-6 " >
             <div class="panel panel-success rounded shadow">

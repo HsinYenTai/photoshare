@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Activity;
 use App\Album;
 use App\Item;
+use App\ItemLike;
 use App\User;
 use App\Watch;
 use Illuminate\Http\Request;
@@ -30,7 +31,11 @@ class HomeController extends Controller
         $friendsId = [];
         foreach ($friends as $friend) { $friendsId[] = $friend->watched_id; }
         $recommend = empty($friendsId)? [] : Item::whereIn('owner_id', $friendsId)->take(20)->get();
-        $moments = Item::paginate(50);
+        if ($request->get('album_id')) {
+            $moments = Item::where('album_id', $request->get('album_id'))->get();
+        } else {
+            $moments = Item::paginate(50);
+        }
         $activities = Activity::where('date', '>=', date('c'))->get(); // 'c' means iso
         $data = [
             'user'=>$user,

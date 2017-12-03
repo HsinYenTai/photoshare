@@ -1,33 +1,35 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: darxan
+ * Date: 2017/12/3
+ * Time: 14:16
+ */
 
 namespace App;
+
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Activity extends Model
+class ItemLike extends Model
 {
     use Notifiable;
     use SoftDeletes;
 
-    //
     /**
-     * 应该被调整为日期的属性
-     *
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    protected $fillable = ['name', 'description', 'owner_id', 'date', 'like'];
-
-    public function belongsToUser() {
-        return $this->belongsTo('App\User', 'owner_id', 'id');
-    }
-
-    public function hasManyAttendances() {
-        return $this->hasMany('App\Attendance', 'activity_id', 'id');
-    }
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'item_id', 'user_id',
+    ];
 
     public function insert($data) {
         foreach ($data as $key=>$value) {
@@ -35,7 +37,6 @@ class Activity extends Model
                 $this->$key = $value;
             }
         }
-        $this->likes = 0;
         $this->save();
     }
 }

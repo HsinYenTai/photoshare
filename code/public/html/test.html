@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
+    <!--  All snippets are MIT license http://bootdey.com/license -->
+    <!--
+    	The codes are free, but we require linking to our web site.
+    	Why to Link?
+    	A true story: one girl didn't set a link and had no decent date for two years, and another guy set a link and got a top ranking in Google!
+    	Where to Put the Link?
+    	home, about, credits... or in a good page that you want
+    	THANK YOU MY FRIEND!
+    -->
+    <title>Users Products todo - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/jquery.min.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        .widget-products li>a:after {
+            content: "\f138";
+            font-family: FontAwesome;
+            font-size: 0.875em;
+            font-style: normal;
+            font-weight: normal;
+            margin-top: 32px;
+            position: absolute;
+            right: 10px;
+            text-decoration: inherit;
+            top: 0;
+            color: #cccccc;
+            font-size: 1.3em;
+        }
+        .btn-success {
+            background-color: #2ecc71;
+            border-color: #27ae60;
+        }
+        .btn {
+            border: none;
+            padding: 6px 12px;
+            border-bottom: 4px solid;
+            -webkit-transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
+            transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
+            outline: none;
+        }
+        .checkbox-nice label {
+            padding-top: 3px;
+        }
+        label {
+            font-weight: 400;
+            font-size: 0.875em;
+        }
+        .checkbox-nice input[type=checkbox] {
+            visibility: hidden;
+        }
+        .checkbox-nice {
+            position: relative;
+            padding-left: 15px;
+        }
+        .widget-todo .name {
+            float: left;
+        }
+        .widget-todo>li {
+            border-bottom: 1px solid #ebebeb;
+            padding: 10px 5px;
+        }
+        .widget-todo {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .widget-products li .product>.warranty>i {
+            color: #f1c40f;
+        }
+        .widget-products li .product>.warranty {
+            display: block;
+            text-decoration: none;
+            width: 50%;
+            float: left;
+            font-size: 0.875em;
+        }
+        .widget-products li .product>.price>i {
+            color: #2ecc71;
+        }
+        .widget-products li .product>.price {
+            display: block;
+            text-decoration: none;
+            width: 50%;
+            float: left;
+            font-size: 0.875em;
+        }
+        .widget-products li .product>.name {
+            display: block;
+            font-weight: 600;
+            padding-bottom: 7px;
+        }
+        .widget-products li .product {
+            display: block;
+            margin-left: 90px;
+            margin-top: 19px;
+        }
+        .widget-products li .img {
+            display: block;
+            float: left;
+            text-align: center;
+            width: 70px;
+            height: 68px;
+            overflow: hidden;
+            margin-top: 7px;
+        }
+        .widget-products li>a {
+            height: 88px;
+            display: block;
+            width: 100%;
+            color: #344644;
+            padding: 3px 10px;
+            position: relative;
+            -webkit-transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
+            transition: border-color 0.1s ease-in-out 0s,background-color 0.1s ease-in-out 0s;
+        }
+        .widget-products li {
+            border-bottom: 1px solid #ebebeb;
+        }
+        .widget-products {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .widget-users li {
+            border-bottom: 1px solid #ebebeb;
+            padding: 15px 0;
+            height: 96px;
+        }
+        .label {
+            border-radius: 3px;
+            font-size: 0.875em;
+            font-weight: 600;
+        }
+        .widget-users li>.details>.time {
+            color: #3498db;
+            font-size: 0.75em;
+            padding-bottom: 7px;
+        }
+        .widget-users li>.details>.name>a {
+            color: #344644;
+        }
+        .widget-users li>.details>.name {
+            font-weight: 600;
+        }
+        .widget-users li>.details {
+            margin-left: 60px;
+        }
+        .widget-users li>.img {
+            float: left;
+            margin-top: 8px;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+        .widget-users {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .tabs-wrapper.tabs-no-header .tab-content {
+            padding: 0 20px 20px;
+        }
+        .nav-tabs>li>a {
+            border-radius: 0;
+            font-size: 1.125em;
+            font-weight: 300;
+            outline: none;
+            color: #555;
+            margin-right: 3px;
+        }
+        .nav>li {
+            float: left;
+        }
+        .tabs-wrapper .nav-tabs {
+            margin-bottom: 15px;
+        }
+        .nav-tabs {
+            background: #d0d8de;
+            border-color: transparent;
+            -moz-border-radius: 3px 3px 0 0;
+            -webkit-border-radius: 3px 3px 0 0;
+            border-radius: 3px 3px 0 0;
+        }
+        .main-box {
+            background: #FFFFFF;
+            -webkit-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -moz-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -o-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            -ms-box-shadow: 1px 1px 2px 0 #CCCCCC;
+            box-shadow: 1px 1px 2px 0 #CCCCCC;
+            margin-bottom: 16px;
+            -webikt-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="col-md-8">
+    <table class="bordered ">
+        <thead>
+        <tr>
+            <th>user</th>
+            <th>name</th>
+            <th>email</th>
+            <th>password</th>
+            <th>phone</th>
+            <th>website</th>
+            <th>created_at</th>
+            <th>updated_at</th>
+            <th>is_admin</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="list">
+            <form action="../admin/update">
+                <tr class="narrow-table">
+                    <input type="hidden" name="id" value="{{$user->id}}">
+
+                    <td>
+                        <!--<span><img src="{{$user->avatar}}" style="width: 3em;height: 3em"></span>-->
+                        <input name="id" disabled value="{{$user->id}}"></span>
+                    </td>
+                    <td><span><input name="name" value="{{$user->name}}"></span></td>
+                    <td><span><input name="email" value="{{$user->email}"></span></td>
+                    <td><span><input name="password" value="{{$user->password}"></span></td>
+                    <td><span><input name="phone" value="{{$user->phone}}"></span></td>
+                    <td><span><input name="website" value="{{$user->website}}"></span></td>
+                    <td><span><input name="is_admin" value="{{$user->is_admin}}"></span></td>
+                    <td><span><input name="created_at" value="{{$user->created_at}}"></span></td>
+                    <td><span><input name="updated_at" value="{{$user->updated_at}}"></span></td>
+                    <td><button type="submit">更新</button></td>
+                </tr>
+            </form>
+        </tbody>
+    </table>
+    
+</div>
+</body>
+</html>

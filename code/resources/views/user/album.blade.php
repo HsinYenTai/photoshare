@@ -48,13 +48,12 @@
 
                     <div class="panel-footer">
                         <div class="form-group has-feedback no-margin">
-                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">查看图片</button>
-
+                            <a href="../album/delete?album_id={{$album->id}}" class="btn btn-primary btn-lg" title="删除相册及所含图片">删除相册</a>
+                            <a href="../home/index?album_id={{$album->id}}" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">查看图片</a>
                             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#upload{{$album->id}}">上传图片</button>
                             <!-- 模态框（Modal） -->
                             <div class="modal fade" id="upload{{$album->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-
                                     <div class="modal-content">
                                         <div class="container">
                                             <div class="col-md-6">

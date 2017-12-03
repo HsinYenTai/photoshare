@@ -1,12 +1,19 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: darxan
+ * Date: 2017/12/3
+ * Time: 14:42
+ */
 
 namespace App;
+
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Activity extends Model
+class Attendance extends Model
 {
     use Notifiable;
     use SoftDeletes;
@@ -19,14 +26,12 @@ class Activity extends Model
      */
     protected $dates = ['deleted_at'];
 
-    protected $fillable = ['name', 'description', 'owner_id', 'date', 'like'];
+    protected $fillable = [
+        'activity_id', 'user_id',
+    ];
 
     public function belongsToUser() {
-        return $this->belongsTo('App\User', 'owner_id', 'id');
-    }
-
-    public function hasManyAttendances() {
-        return $this->hasMany('App\Attendance', 'activity_id', 'id');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function insert($data) {
@@ -35,7 +40,7 @@ class Activity extends Model
                 $this->$key = $value;
             }
         }
-        $this->likes = 0;
         $this->save();
     }
+
 }

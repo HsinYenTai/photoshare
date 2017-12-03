@@ -32,12 +32,16 @@ Route::any('user/me', "UserController@detail");
 Route::any('user/admin', "UserController@view");
 
 Route::any('album/create', 'AlbumController@create');
+Route::any('album/delete', 'AlbumController@delete');
 
 Route::post('item/save', 'ItemController@save');
 Route::any('item/forward', 'ItemController@forward');
-
+Route::any('item/like', 'ItemController@like');
 Route::any('item/comment', 'CommentController@comment');
+
+Route::any('activity/delete', 'ActivityController@delete');
 Route::any('activity/save', 'ActivityController@save');
+Route::any('activity/attendant', 'ActivityController@attendant');
 
 Route::any('home/index', 'HomeController@index');
 Route::any('home/dump', 'HomeController@dump');

@@ -19,6 +19,7 @@
     @foreach($activities as $activity)
         <?php
         $user = $activity->belongsToUser()->first();
+        $attendances = $activity->hasManyAttendances()->get();
         ?>
         <div class="col-md-6 " >
             <div class="panel panel-success rounded shadow">
@@ -38,22 +39,30 @@
                             </div>
                         </div>
                     </div><!-- /.pull-left -->
+                    <div class="clearfix"></div>
+                    @foreach($attendances as $attendance)
+                        <?php $speaker = $attendance->belongsToUser()->first(); ?>
+                        <div class="line no-margin"></div><!-- /.line -->
+                        <div class="media inner-all no-margin">
+                            <div class="pull-left">
+                                <img src="{{$speaker->avatar}}" alt="..." class="img-post2">
+                            </div><!-- /.pull-left -->
+                            <div class="media-body">
+                                <a href="#" class="h4">{{$speaker->name}}</a>
+                                <small class="block text-muted">joined!</small>
+                                <em class="text-xs text-muted">Posted on <span class="text-danger">{{$attendance->created_at}}</span></em>
+                            </div><!-- /.media-body -->
+                        </div><!-- /.media -->
+                    @endforeach
                     <div class="pull-right">
-                        <a href="#" class="text-white h4"><i class="fa fa-heart"></i> {{$activity->likes}}</a>
+                        <a href="../activity/attendant?activity_id={{$activity->id}}" class="text-white h4"><i class="fa fa-heart"></i> {{$activity->likes}}</a>
                     </div><!-- /.pull-right -->
                     <div class="clearfix"></div>
+                    <div class="form-group has-feedback no-margin">
+                        <a href="../activity/delete?activity_id={{$activity->id}}" class="btn btn-primary btn-lg" title="删除活动">删除活动</a>
+                    </div>
                 </div><!-- /.panel-heading -->
 
-                <div class="panel-footer">
-                    <form action="../item/comment" class="form-horizontal">
-                        <div class="form-group has-feedback no-margin">
-                            <input type="hidden" name="item_id" value="{{$activity->id}}">
-                            <input type="hidden" name="user_id" value="{{$user->id}}">
-                            <input class="form-control" type="text" name="content" placeholder="Your comment here...">
-                            <button type="submit" class="btn btn-theme fa fa-search form-control-feedback"></button>
-                        </div>
-                    </form>
-                </div><!-- /.panel-footer -->
             </div><!-- /.panel -->
         </div>
     @endforeach
