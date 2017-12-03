@@ -23,7 +23,7 @@ class HomeController extends Controller
 
 
     public function index(Request $request) {
-        $user_id = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $user_id = $request->session()->get(USER_KEY_ID);
         $user = User::find($user_id);
         $albums = Album::where('owner_id', $user_id)->get();
         $items = Item::where('owner_id', $user_id)->get();
@@ -33,9 +33,15 @@ class HomeController extends Controller
         $recommend = empty($friendsId)? [] : Item::whereIn('owner_id', $friendsId)->take(20)->get();
         if ($request->get('album_id')) {
             $moments = Item::where('album_id', $request->get('album_id'))->get();
+        } else if ($request->get('keyword')) {
+            $keyword = $request->get('keyword');
+            $moments = Item::where('label', 'like', "%$keyword%")
+                                ->orWhere('description', 'like', "%$keyword%")
+                                ->get();
         } else {
-            $moments = Item::paginate(50);
+            $moments = Item::paginate(50)->or;
         }
+
         $activities = Activity::where('date', '>=', date('c'))->get(); // 'c' means iso
         $data = [
             'user'=>$user,

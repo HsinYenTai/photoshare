@@ -29,7 +29,7 @@ class ItemController extends Controller
 
         $data['url'] = $saveResult;
         $data['owner_id'] =
-            $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+            $request->session()->get(USER_KEY_ID);
         (new Item())->insert($data);
         return $this->redirectHome();
     }
@@ -37,7 +37,7 @@ class ItemController extends Controller
     public function forward(Request $request) {
         $id = $request->all()['id'];
         $item = Item::find($id);
-        $user_id = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $user_id = $request->session()->get(USER_KEY_ID);
         $item->owner_id = $user_id;
         (new Item())->insert($item->attributesToArray());
         return $this->redirectHome();
@@ -68,7 +68,7 @@ class ItemController extends Controller
     {
         $data = $request->all();
 
-        $user_id = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $user_id = $request->session()->get(USER_KEY_ID);
         $item_id = $data['item_id'];
         $data['user_id'] = $user_id;
 

@@ -23,7 +23,7 @@ class AlbumController extends Controller
     public function create(Request $request) {
         try {
             $data = $request->all();
-            $data['owner_id'] = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+            $data['owner_id'] = $request->session()->get(USER_KEY_ID);
             $this->validator($data)->validate();
             (new Album)->insert($data);
             return $this->redirectHome();

@@ -18,7 +18,7 @@
     </div><!-- /.panel -->
     @foreach($activities as $activity)
         <?php
-        $user = $activity->belongsToUser()->first();
+        $owner = $activity->belongsToUser()->first();
         $attendances = $activity->hasManyAttendances()->get();
         ?>
         <div class="col-md-6 " >
@@ -27,10 +27,10 @@
                     <div class="pull-left half">
                         <div class="media">
                             <div class="media-object pull-left">
-                                <img src="{{$user->avatar}}" alt="..." class="img-circle img-post">
+                                <img src="{{$owner->avatar}}" alt="..." class="img-circle img-post">
                             </div>
                             <div class="media-body">
-                                <a href="#" class="media-heading block mb-0 h4 text-white">{{$user->name}}</a>
+                                <a href="#" class="media-heading block mb-0 h4 text-white">{{$owner->name}}</a>
                                 <span class="text-white h6">{{$activity->created_at}}</span>
                             </div>
                             <div>
@@ -49,8 +49,7 @@
                             </div><!-- /.pull-left -->
                             <div class="media-body">
                                 <a href="#" class="h4">{{$speaker->name}}</a>
-                                <small class="block text-muted">joined!</small>
-                                <em class="text-xs text-muted">Posted on <span class="text-danger">{{$attendance->created_at}}</span></em>
+                                <em class="text-xs text-muted">Joined on <span class="text-danger">{{$attendance->created_at}}</span></em>
                             </div><!-- /.media-body -->
                         </div><!-- /.media -->
                     @endforeach
@@ -59,7 +58,12 @@
                     </div><!-- /.pull-right -->
                     <div class="clearfix"></div>
                     <div class="form-group has-feedback no-margin">
+                        @if($user->id==$activity->owner_id)
                         <a href="../activity/delete?activity_id={{$activity->id}}" class="btn btn-primary btn-lg" title="删除活动">删除活动</a>
+
+                        @else
+                            <a href="#" class="btn btn-primary btn-lg" title="删除活动">无权操作</a>
+                        @endif
                     </div>
                 </div><!-- /.panel-heading -->
 

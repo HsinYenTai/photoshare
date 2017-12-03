@@ -45,3 +45,5 @@ Route::any('activity/attendant', 'ActivityController@attendant');
 
 Route::any('home/index', 'HomeController@index');
 Route::any('home/dump', 'HomeController@dump');
+
+Route::any('watch/watch', 'WatchController@watch');

@@ -19,7 +19,7 @@ class Item extends Model
     protected $dates = ['deleted_at'];
 
 
-    protected $fillable = ['owner_id', 'url', 'album_id', 'description', 'likes'];
+    protected $fillable = ['owner_id', 'url', 'album_id', 'description', 'likes', 'label'];
 
     public function hasManyComments() {
         return $this->hasMany('App\Comment', 'item_id', 'id');

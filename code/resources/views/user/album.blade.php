@@ -29,8 +29,13 @@
                                     <span class="text-white h6">{{$user->created_at}}</span>
                                 </div>
                             </div>
+
                         </div><!-- /.pull-left -->
+
                         <div class="pull-right">
+                            <span class="text-right h4">
+                            {{$album->label}} &nbsp; &nbsp;
+                            </span>
                             <a href="#" class="text-white h4">
                                 <i class="fa fa-heart"></i>
                                 {{$album->likes}}
@@ -49,7 +54,7 @@
                     <div class="panel-footer">
                         <div class="form-group has-feedback no-margin">
                             <a href="../album/delete?album_id={{$album->id}}" class="btn btn-primary btn-lg" title="删除相册及所含图片">删除相册</a>
-                            <a href="../home/index?album_id={{$album->id}}" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">查看图片</a>
+                            <a href="../home/index?album_id={{$album->id}}" class="btn btn-primary btn-lg">查看图片</a>
                             <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#upload{{$album->id}}">上传图片</button>
                             <!-- 模态框（Modal） -->
                             <div class="modal fade" id="upload{{$album->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -60,6 +65,9 @@
                                                 <form class="form-group" method="post" action="../item/save" enctype="multipart/form-data">
                                                     {{ csrf_field() }}
                                                     <label>Upload Image</label>
+                                                    <div>
+                                                        <textarea class="form-control input-lg no-border" name="label" rows="1" placeholder="input label here..."></textarea>
+                                                    </div>
                                                     <div class="input-group">
                                                         <span class="input-group-btn">
                                                             <span class="btn btn-default btn-file">

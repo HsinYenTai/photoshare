@@ -17,4 +17,8 @@ class Watch extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function belongsToUser() {
+        return $this->belongsTo('App\User', 'watched_id', 'id');
+    }
 }

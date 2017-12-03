@@ -1,7 +1,23 @@
 <div class="row clearfix tab-pane fade  active in" id="tab-moments">
+
+    <form method="get" action="../home/index">
+        <input class="form-control input-lg no-border" name="keyword" rows="1" placeholder="input keyword you wanna search...">
+        <div class="panel-footer">
+            <input type="submit" class="btn btn-success pull-right mt-5">
+            <ul class="nav nav-pills">
+                <li><a href="#" ><i class="fa fa-user"></i></a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i></a></li>
+                <li><a href="#"><i class="fa fa-camera"></i></a></li>
+                <li><a href="#"><i class="fa fa-smile-o"></i></a></li>
+            </ul><!-- /.nav nav-pills -->
+        </div><!-- /.panel-footer -->
+    </form>
+
     <br/>
+    <?php $count = 0;?>
     @foreach($moments as $item)
         <?php
+            $count++;
             $user = $item->belongsToUser()->first();
             $comments = $item->hasManyComments()->get() ;
         ?>
@@ -19,8 +35,14 @@
                         </div>
                     </div>
                 </div><!-- /.pull-left -->
+
                 <div class="pull-right">
-                    <a href="../item/like?item_id={{$item->id}}" class="text-white h4"><i class="fa fa-heart"></i> {{$item->likes}}</a>
+                    <span class="text-right h4">
+                            {{$item->label}} &nbsp; &nbsp;
+                    </span>
+                    <a href="../item/like?item_id={{$item->id}}" class="text-white h4">
+                        <i class="fa fa-heart"></i> {{$item->likes}}
+                    </a>
                 </div><!-- /.pull-right -->
                 <div class="clearfix"></div>
             </div><!-- /.panel-heading -->
@@ -60,5 +82,9 @@
             </div><!-- /.panel-footer -->
         </div><!-- /.panel -->
     </div>
+
+            @if($count%2==0)
+                <div class="clearfix"></div>
+            @endif
     @endforeach
 </div>

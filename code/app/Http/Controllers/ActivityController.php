@@ -17,7 +17,7 @@ class ActivityController extends Controller
 {
     public function save(Request $request) {
         $data = $request->all();
-        $data['owner_id'] = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $data['owner_id'] = $request->session()->get(USER_KEY_ID);
         (new Activity())->insert($data);
         return $this->redirectHome();
     }
@@ -42,7 +42,7 @@ class ActivityController extends Controller
     public function attendant(Request $request) {
         $data = $request->all();
 
-        $user_id = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $user_id = $request->session()->get(USER_KEY_ID);
         $item_id = $data['activity_id'];
         $data['user_id'] = $user_id;
 
