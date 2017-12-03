@@ -26,6 +26,7 @@
             </div><!-- /.panel-heading -->
             <div class="panel-body no-padding">
                 <img  src="{{$item->url}}" alt="..." class="img-responsive full-width">
+
                 <div class="inner-all block">
                     view all <a href="#">{{count($comments)}} comments</a>
                 </div><!-- /.inner-all -->
@@ -43,6 +44,9 @@
                     </div><!-- /.media-body -->
                 </div><!-- /.media -->
                 @endforeach
+                <div class="pull-right">
+                    <a href="../item/forward?id={{$item->id}}" class="text-white h4"><i class="fa fa-code-fork"></i> &nbsp; </a>
+                </div><!-- /.pull-right -->
             </div><!-- /.panel-body -->
             <div class="panel-footer">
                 <form action="../item/comment" class="form-horizontal">

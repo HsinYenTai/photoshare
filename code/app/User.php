@@ -2,11 +2,11 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Model
 {
     use Notifiable;
     use SoftDeletes;
@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','avatar'
+        'name', 'email', 'password','avatar', 'website', 'phone', 'description', 'is_admin'
     ];
 
     /**
@@ -39,8 +39,8 @@ class User extends Authenticatable
                 $this->$key = $value;
             }
         }
-
-        $this->save();
+        return $this->save();
     }
+
 
 }

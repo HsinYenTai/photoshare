@@ -18,7 +18,7 @@ class ItemController extends Controller
 
     public function save(Request $request)
     {
-        $saveResult = $this->saveFile($request);
+        $saveResult = $this->saveFile($request, 'picture');
         $data = $request->all();
         if (is_array($saveResult)) {
             dump($saveResult);
@@ -26,33 +26,21 @@ class ItemController extends Controller
         }
 
         $data['url'] = $saveResult;
-        $data['owner_id'] = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $data['owner_id'] =
+            $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
         (new Item())->insert($data);
         return $this->redirectHome();
     }
 
-    private function saveFile(Request $request) {
-        //判断请求中是否包含name=file的上传文件
-        if(!$request->hasFile('picture')){
-            return ['上传文件为空！'];
-        }
-        $file = $request->file('picture');
-        //判断文件上传过程中是否出错
-        if(!$file->isValid()){
-            return ['文件上传出错！'];
-        }
-        $newFileName = md5(time().rand(0,10000)).'.'.$file->getClientOriginalExtension();
-        $savePath = 'public/pictures/'.$newFileName;
-        $urlPath = '../storage/pictures/'.$newFileName;
-        Storage::put(
-            $savePath,
-            file_get_contents($file->getRealPath())
-        );
-        if(!Storage::exists($savePath)){
-            return ['保存文件失败！'];
-        }
-        return $urlPath;
+    public function forward(Request $request) {
+        $id = $request->all()['id'];
+        $item = Item::find($id);
+        $user_id = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $item->owner_id = $user_id;
+        (new Item())->insert($item->attributesToArray());
+        return $this->redirectHome();
     }
+
 
     public function delete(Request $request)
     {
@@ -84,8 +72,4 @@ class ItemController extends Controller
 
     }
 
-    public function forward(Request $request)
-    {
-
-    }
 }

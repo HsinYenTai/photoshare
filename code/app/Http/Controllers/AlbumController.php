@@ -46,7 +46,7 @@ class AlbumController extends Controller
     {
         $album = Album::find($request->get('id'));
         if ($album && $album->owner_id==$request->session()->get(USER_KEY_ID)) {
-            $album->softDeletes();
+            $album->delete();
         }
     }
 

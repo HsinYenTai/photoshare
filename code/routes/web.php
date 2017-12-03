@@ -23,13 +23,18 @@ Route::get('user/register', "UserController@getRegister");
 Route::get('user/postRegister', "UserController@postRegister");
 Route::post('user/register', "UserController@postRegister");
 
-Route::any('user/update', "UserController@update");
+Route::post('user/update', "UserController@update");
+Route::any('admin/update', "UserController@adminUpdate");
 Route::any('user/reset', "UserController@resetPassword");
 Route::any('user/delete', "UserController@delete");
+
+Route::any('user/me', "UserController@detail");
+Route::any('user/admin', "UserController@view");
 
 Route::any('album/create', 'AlbumController@create');
 
 Route::post('item/save', 'ItemController@save');
+Route::any('item/forward', 'ItemController@forward');
 
 Route::any('item/comment', 'CommentController@comment');
 Route::any('activity/save', 'ActivityController@save');

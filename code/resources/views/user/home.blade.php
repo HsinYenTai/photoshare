@@ -168,15 +168,15 @@
                                     </li>
                                     <li class="text-center">
                                         <h4 class="text-capitalize">{{$user->name}}</h4>
-                                        <p class="text-muted text-capitalize">no description...</p>
+                                        <p class="text-muted text-capitalize">{{$user->description}}</p>
                                     </li>
                                     <li>
-                                        <a href="" class="btn btn-success text-center btn-block">PRO Account</a>
+                                        <a href="../user/admin" class="btn btn-success text-center btn-block">PRO Account</a>
                                     </li>
                                     <li><br></li>
                                     <li>
                                         <div class="btn-group-vertical btn-block">
-                                            <a href="" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Edit Account</a>
+                                            <a href="../user/me" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Edit Account</a>
                                             <a href="" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
                                         </div>
                                     </li>
@@ -200,8 +200,20 @@
                         <div class="panel-body no-padding rounded">
                             <ul class="list-group no-margin">
                                 <li class="list-group-item"><i class="fa fa-envelope mr-5"></i> {{$user->email}}</li>
-                                <li class="list-group-item"><i class="fa fa-globe mr-5"></i> no website</li>
-                                <li class="list-group-item"><i class="fa fa-phone mr-5"></i> no phone here</li>
+                                <li class="list-group-item"><i class="fa fa-globe mr-5"></i>
+                                    @if(empty($user->website))
+                                        no website
+                                    @else
+                                    {{$user->website}}
+                                    @endif
+                                </li>
+                                <li class="list-group-item"><i class="fa fa-phone mr-5"></i>
+                                    @if(empty($user->phone))
+                                        no phone
+                                    @else
+                                        {{$user->phone}}
+                                    @endif
+                                </li>
                             </ul>
                         </div><!-- /.panel-body -->
                     </div><!-- /.panel -->

@@ -49,10 +49,14 @@ class UserController extends Controller
 
     public function login(Request $request, User $user) {
         $request->session()->put(USER_KEY_ID, $user->id);
+        if ($user->is_admin) {
+            $request->session()->put(ADMIN_KEY_ID, $user->id);
+        }
     }
 
     public function logout(Request $request) {
         $request->session()->forget(USER_KEY_ID);
+        $request->session()->forget(ADMIN_KEY_ID);
     }
 
     public function postRegister(Request $request) {
@@ -80,11 +84,48 @@ class UserController extends Controller
         ]);
     }
 
+    public function view(Request $request) {
+        if (!$request->session()->get(ADMIN_KEY_ID, DEFAULT_USER_ID)) {
+            return $this->redirectHome();
+        }
+        $keyword = $request->get('keyword');
+        if (!$keyword) {
+            $users = User::all();
+        } else  {
+            $users = User::where('id', $keyword)
+                        ->orWhere('email', 'like', "$keyword%")
+                        ->orWhere('name', 'like', "%$keyword%")
+                        ->get();
+        }
+        return View::make('admin.user', ['users'=>$users]);
+    }
+
+    public function detail(Request $request) {
+        $id = $request->session()->get(USER_KEY_ID, DEFAULT_USER_ID);
+        $user = User::find($id);
+        return View::make('user.user', ['user'=>$user]);
+    }
+
     public function update(Request $request) {
-        dump($request);
+
+        $saveResult = $this->saveFile($request, 'avatar');
         $data = $request->all();
-        $user = new User($data);
-        $user->update();
+        if (!is_array($saveResult)) {
+            $data['avatar'] = $saveResult;
+        }
+        $user = User::find($request->session()->get(USER_KEY_ID, DEFAULT_USER_ID));
+        $user->insert($data);
+        return View::make('user.user', ['user'=>$user]);
+    }
+
+    protected function adminUpdate(Request $request) {
+        $data = $request->all();
+        if ($request->session()->get(ADMIN_KEY_ID, DEFAULT_USER_ID)) {
+            $user = User::find($data['id']);
+            $user->insert($data);
+            return redirect()->action('UserController@view');
+        }
+        return $this->redirectHome();
     }
 
     public function resetPassword(Request $request) {
@@ -92,8 +133,10 @@ class UserController extends Controller
     }
 
     public function delete(Request $request) {
-        $user = User::find($request->session()->get(USER_KEY_ID));
-        $user->softDeletes();
+        $user = User::find($request->get('id'));
+        dump($user);
+        $user->delete();
+        return View::make('admin.user', ['users'=>User::all()]);
     }
 
     public function avatar($email) {
