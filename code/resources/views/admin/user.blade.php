@@ -198,6 +198,7 @@
         <tbody id="list">
         @foreach($users as $user)
         <form action="../admin/update" method="post">
+            {{csrf_token()}}
             <tr class="narrow-table">
                 <input type="hidden" name="id" value="{{$user->id}}">
                 <td>
