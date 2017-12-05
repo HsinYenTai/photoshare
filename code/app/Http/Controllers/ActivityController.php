@@ -19,7 +19,7 @@ class ActivityController extends Controller
         $data = $request->all();
         $user_id = $request->session()->get(USER_KEY_ID);
         if ($user_id) {
-            $data['owner_id'] = $user_id
+            $data['owner_id'] = $user_id;
             (new Activity())->insert($data);
         } else {
             $this->setMessage("please login first");

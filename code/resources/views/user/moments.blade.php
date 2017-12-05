@@ -73,7 +73,7 @@
             </div><!-- /.panel-body -->
             <div class="panel-footer">
                 <form action="../item/comment" class="form-horizontal" method="post">
-                    {{csrf_token()}}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="form-group has-feedback no-margin">
                         <input type="hidden" name="item_id" value="{{$item->id}}">
                         <input type="hidden" name="user_id" value="{{$user->id}}">

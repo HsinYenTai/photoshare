@@ -32,7 +32,10 @@ class HomeController extends Controller
                 ->latest()
                 ->get();
         } else {
-            return Item::where('created_at', '>=', $user->updated_at)->orderby('likes', 'desc')->get();
+            return Item::where('created_at', '>=', $user->updated_at)
+                ->orderby('likes', 'desc')
+                ->orderby('created_at', 'desc')
+                ->get();
         }
     }
 

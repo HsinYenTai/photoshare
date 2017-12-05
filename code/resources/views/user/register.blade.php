@@ -32,7 +32,7 @@
                 </div>
 
                 <form action="../user/postRegister" method="post">
-                    {{csrf_token()}}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="login form">
                         <div class="group">
                             <div class="group-ipt email">
