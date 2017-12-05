@@ -17,8 +17,13 @@ class ActivityController extends Controller
 {
     public function save(Request $request) {
         $data = $request->all();
-        $data['owner_id'] = $request->session()->get(USER_KEY_ID);
-        (new Activity())->insert($data);
+        $user_id = $request->session()->get(USER_KEY_ID);
+        if ($user_id) {
+            $data['owner_id'] = $user_id
+            (new Activity())->insert($data);
+        } else {
+            $this->setMessage("please login first");
+        }
         return $this->redirectHome();
     }
 
@@ -27,6 +32,8 @@ class ActivityController extends Controller
         $activity = Activity::find($activity_id);
         if ($activity && $activity->owner_id==$request->session()->get(USER_KEY_ID, DEFAULT_INCLUDE_PATH)) {
             $activity->delete();
+        } else {
+            $this->setMessage("no auth to delete.");
         }
         return $this->redirectHome();
     }
@@ -58,6 +65,8 @@ class ActivityController extends Controller
                 $activity->likes += 1;
                 $activity->save();
             }
+        } else {
+            $this->setMessage("already attendant");
         }
         return $this->redirectHome();
     }

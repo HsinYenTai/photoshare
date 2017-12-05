@@ -37,13 +37,15 @@ class UserController extends Controller
             if ($user) {
                 if ($user->password==$password) {
                     $this->login($request, $user);
-                    return redirect()->action('HomeController@index', $request);
+                    return $this->redirectHome();
+                } else {
+                    return $this->getLogin($request, "wrong password");
                 }
+            } else {
+                return $this->getLogin($request, "wrong user's email or name");
             }
-            dump('fail');
         } catch (ValidationException $e) {
-            dump($e);
-            exit();
+            return $this->getLogin($request, $e->errors());
         }
 
     }

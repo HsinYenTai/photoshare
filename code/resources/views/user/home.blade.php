@@ -235,7 +235,7 @@
                                                 <span>moments</span>
                                             </a>
                                         </li>
-                                        <li><a href="#tab-recommend" data-toggle="tab"><i class="fa fa-fw fa-refresh"></i> <span>recommend</span></a></li>
+                                        <li><a href="#tab-recommend" data-toggle="tab"><i class="fa fa-fw fa-refresh"></i> <span>watched</span></a></li>
                                         <li><a href="#tab-friends" data-toggle="tab"><i class="fa fa-fw fa-user"></i> <span>Friends</span></a></li>
                                         <li><a href="#tab-activity" data-toggle="tab"><i class="fa fa-fw fa-photo"></i> <span>Activities</span> <small></small></a></li>
                                         <li><a href="#tab-photo" data-toggle="tab"><i class="fa fa-fw fa-photo"></i> <span>Photos</span> <small></small></a></li>
@@ -251,7 +251,7 @@
                                         <span>moments</span>
                                     </a>
                                 </li>
-                                <li><a href="#tab-recommend" data-toggle="tab"><i class="fa fa-fw fa-refresh"></i> <span>recommend</span></a></li>
+                                <li><a href="#tab-recommend" data-toggle="tab"><i class="fa fa-fw fa-refresh"></i> <span>watched</span></a></li>
                                 <li><a href="#tab-friends" data-toggle="tab"><i class="fa fa-fw fa-user"></i> <span>Friends</span></a></li>
                                 <li><a href="#tab-activity" data-toggle="tab"><i class="fa fa-fw fa-photo"></i> <span>Activities</span> <small></small></a></li>
                                 <li><a href="#tab-photo" data-toggle="tab"><i class="fa fa-fw fa-photo"></i> <span>Photos</span> <small></small></a></li>
@@ -268,7 +268,7 @@
                         @include('user.friends')
                         @include('user.moments')
                         @include('user.photo')
-                        @include('user.recommend')
+                        @include('user.watched')
                     </div>
 
 
@@ -278,6 +278,6 @@
         </div>
 
         <script src="../js/bootstrap.min.js"></script>
-
+        @include('common.message')
         </body>
         </html>

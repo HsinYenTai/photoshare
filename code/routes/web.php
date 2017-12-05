@@ -13,16 +13,16 @@
 
 
 
-Route::get('user/logout', "UserController@logout");
-Route::get('user/login', "UserController@getLogin");
-Route::get('user/postLogin', "UserController@postLogin");
-Route::post('user/login', "UserController@postLogin");
+Route::any('user/logout', "UserController@logout");
+Route::any('user/login', "UserController@getLogin");
+Route::any('user/postLogin', "UserController@postLogin");
+Route::any('user/login', "UserController@postLogin");
 
-Route::get('user/register', "UserController@getRegister");
-Route::get('user/postRegister', "UserController@postRegister");
-Route::post('user/register', "UserController@postRegister");
+Route::any('user/register', "UserController@getRegister");
+Route::any('user/postRegister', "UserController@postRegister");
+Route::any('user/register', "UserController@postRegister");
 
-Route::post('user/update', "UserController@update");
+Route::any('user/update', "UserController@update");
 Route::any('admin/update', "UserController@adminUpdate");
 Route::any('user/reset', "UserController@resetPassword");
 Route::any('user/delete', "UserController@delete");
@@ -33,7 +33,7 @@ Route::any('user/admin', "UserController@view");
 Route::any('album/create', 'AlbumController@create');
 Route::any('album/delete', 'AlbumController@delete');
 
-Route::post('item/save', 'ItemController@save');
+Route::any('item/save', 'ItemController@save');
 Route::any('item/forward', 'ItemController@forward');
 Route::any('item/like', 'ItemController@like');
 Route::any('item/comment', 'CommentController@comment');

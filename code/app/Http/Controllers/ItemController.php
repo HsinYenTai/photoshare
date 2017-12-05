@@ -24,7 +24,7 @@ class ItemController extends Controller
         $saveResult = $this->saveFile($request, 'picture');
         $data = $request->all();
         if (is_array($saveResult)) {
-            dump($saveResult);
+            $this->setMessage($saveResult);
         } else{
             $data['url'] = $saveResult;
             $data['owner_id'] =
@@ -35,6 +35,8 @@ class ItemController extends Controller
                 $album->background = $saveResult;
                 $album->save();
                 (new Item())->insert($data);
+            } else {
+                $this->setMessage("error because of no album_id");
             }
         }
 
@@ -90,7 +92,11 @@ class ItemController extends Controller
                 (new ItemLike())->insert($data);
                 $item->likes += 1;
                 $item->save();
+            } else {
+                $this->setMessage("not existed item");
             }
+        } else {
+            $this->setMessage("already liked on $like->created_at");
         }
         return $this->redirectHome();
     }

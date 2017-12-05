@@ -49,7 +49,11 @@
                             </div><!-- /.pull-left -->
                             <div class="media-body">
                                 <a href="#" class="h4">{{$speaker->name}}</a>
-                                <em class="text-xs text-muted">Joined on <span class="text-danger">{{$attendance->created_at}}</span></em>
+                                <em class="text-xs text-muted">
+                                    <span class="h3">Joined</span>
+                                    <br/>
+                                    on
+                                    <span class="text-danger">{{$attendance->created_at}}</span></em>
                             </div><!-- /.media-body -->
                         </div><!-- /.media -->
                     @endforeach
@@ -60,7 +64,6 @@
                     <div class="form-group has-feedback no-margin">
                         @if($user->id==$activity->owner_id)
                         <a href="../activity/delete?activity_id={{$activity->id}}" class="btn btn-primary btn-lg" title="删除活动">删除活动</a>
-
                         @else
                             <a href="#" class="btn btn-primary btn-lg" title="删除活动">无权操作</a>
                         @endif

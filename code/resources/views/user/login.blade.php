@@ -92,5 +92,6 @@
         }
     });
 </script>
+@include('common.message')
 </body>
 </html>

@@ -14,11 +14,23 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function getLogin(Request $request) {
+    protected function setMessage($message) {
+        if ($message) {
+            if (is_array($message) || is_object($message)) {
+                session()->put(MESSAGE, json_encode($message));
+            } else{
+                session()->put(MESSAGE, $message);
+            }
+        }
+    }
+
+    public function getLogin(Request $request, $message = null) {
+        $this->setMessage($message);
         return View::make('user.login');
     }
 
-    protected function redirectHome() {
+    protected function redirectHome($message = null) {
+        $this->setMessage($message);
         return redirect()->action('HomeController@index');
     }
 

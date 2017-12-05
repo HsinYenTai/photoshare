@@ -26,10 +26,11 @@ class AlbumController extends Controller
             $data['owner_id'] = $request->session()->get(USER_KEY_ID);
             $this->validator($data)->validate();
             (new Album)->insert($data);
-            return $this->redirectHome();
+
         } catch (ValidationException $e) {
-            dump($e);
+            $this->setMessage($e->errors());
         }
+        return $this->redirectHome();
     }
 
     protected function validator(array $data)
@@ -50,6 +51,8 @@ class AlbumController extends Controller
         if ($album && $album->owner_id==$request->session()->get(USER_KEY_ID, DEFAULT_INCLUDE_PATH)) {
             $album->delete();
             Item::where('album_id', $album_id)->delete();
+        } else {
+            $this->setMessage("no auth to delete");
         }
         return $this->redirectHome();
     }

@@ -17,8 +17,14 @@ class CommentController extends Controller
 
     public function comment(Request $request) {
         $data = $request->all();
-        $data['user_id'] = $request->session()->get(USER_KEY_ID);
-        (new Comment())->insert($data);
+        $user_id = $request->session()->get(USER_KEY_ID);
+        if ($user_id) {
+            $data['user_id'] = $user_id;
+            (new Comment())->insert($data);
+        } else {
+            $this->setMessage("plz login first");
+        }
+
         return $this->redirectHome();
     }
 }

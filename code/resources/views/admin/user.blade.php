@@ -219,6 +219,6 @@
     </table>
 
 </div>
-
+@include('common.message')
 </body>
 </html>

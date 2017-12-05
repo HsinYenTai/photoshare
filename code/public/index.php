@@ -9,6 +9,7 @@
 
 define('LARAVEL_START', microtime(true));
 
+define('MESSAGE', 'MESSAGE');
 define('USER_KEY_ID', 'USER_KEY_ID');
 define('ADMIN_KEY_ID', 'ADMIN_KEY_ID');
 define('DEFAULT_USER_ID', 1);

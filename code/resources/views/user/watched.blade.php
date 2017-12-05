@@ -3,7 +3,7 @@
 
     <br/>
     <?php $count = 0;?>
-    @foreach($recommends as $item)
+    @foreach($watched as $item)
         <?php
         $count++;
         $user = $item->belongsToUser()->first();

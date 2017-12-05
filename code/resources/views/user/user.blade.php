@@ -270,5 +270,6 @@
         </div>
     </div>
 </div>
+@include('common.message')
 </body>
 </html>
