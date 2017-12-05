@@ -12,7 +12,7 @@
     	home, about, credits... or in a good page that you want
     	THANK YOU MY FRIEND!
     -->
-    <title>Users Products todo - Bootdey.com</title>
+    <title> admin users </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../js/jquery.min.js"></script>
     <link href="../css/bootstrap.min.css" rel="stylesheet">

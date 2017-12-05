@@ -19,7 +19,7 @@
         <div class="cent-box register-box">
             <div class="cent-box-header">
                 <h1 class="main-title hide">photo share </h1>
-                <h2 class="sub-title">生活热爱分享 - Thousands Find</h2>
+                <h2 class="sub-title">生活热爱分享 - photo share</h2>
             </div>
 
             <div class="cont-main clearfix">

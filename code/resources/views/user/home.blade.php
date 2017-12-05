@@ -10,7 +10,7 @@
         <html lang="en">
         <head>
             <meta charset="utf-8">
-            <title>Profile with tabs like facebook page - Bootdey.com</title>
+            <title>photo share home</title>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <script src="../js/jquery.min.js"></script>
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -230,12 +230,12 @@
                                     </button>
                                     <ul class="dropdown-menu pull-right no-border nav nav-tabs" role="menu">
                                         <li class="active">
-                                            <a href="#tab-moments" data-toggle="tab">
+                                            <a href="#tab-moments" data-toggle="tab" id="li-moments">
                                                 <i class="fa fa-fw fa-clock-o"></i>
                                                 <span>moments</span>
                                             </a>
                                         </li>
-                                        <li><a href="#tab-recommend" data-toggle="tab"><i class="fa fa-fw fa-refresh"></i> <span>watched</span></a></li>
+                                        <li><a href="#tab-recommend" id="li-recommend" data-toggle="tab"><i class="fa fa-fw fa-refresh"></i> <span>watched</span></a></li>
                                         <li><a href="#tab-friends" data-toggle="tab"><i class="fa fa-fw fa-user"></i> <span>Friends</span></a></li>
                                         <li><a href="#tab-activity" data-toggle="tab"><i class="fa fa-fw fa-photo"></i> <span>Activities</span> <small></small></a></li>
                                         <li><a href="#tab-photo" data-toggle="tab"><i class="fa fa-fw fa-photo"></i> <span>Photos</span> <small></small></a></li>
@@ -279,5 +279,6 @@
 
         <script src="../js/bootstrap.min.js"></script>
         @include('common.message')
+        
         </body>
         </html>

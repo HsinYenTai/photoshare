@@ -15,7 +15,11 @@
             </div><!-- /.panel-footer -->
         </form>
 
+        <?php $count = 0;?>
         @foreach($albums as $album)
+            <?php
+            $count++;
+            ?>
             <div class="col-md-6 " >
                 <div class="panel panel-success rounded shadow">
                     <div class="panel-heading no-border">
@@ -90,6 +94,9 @@
                 </div><!-- /.panel -->
             </div>
 
+            @if($count%2==0)
+                <div class="clearfix"></div>
+            @endif
         @endforeach
 
     </div><!-- /.panel -->

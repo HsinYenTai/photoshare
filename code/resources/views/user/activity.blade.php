@@ -16,8 +16,10 @@
         </form>
 
     </div><!-- /.panel -->
+    <?php $count = 0;?>
     @foreach($activities as $activity)
         <?php
+        $count++;
         $owner = $activity->belongsToUser()->first();
         $attendances = $activity->hasManyAttendances()->get();
         ?>
@@ -72,5 +74,8 @@
 
             </div><!-- /.panel -->
         </div>
+        @if($count%2==0)
+            <div class="clearfix"></div>
+        @endif
     @endforeach
 </div>
