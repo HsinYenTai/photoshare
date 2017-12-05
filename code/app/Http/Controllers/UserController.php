@@ -18,9 +18,7 @@ use Mockery\Exception;
 class UserController extends Controller
 {
 
-    public function getLogin(Request $request) {
-        return View::make('user.login');
-    }
+
 
     public function postLogin(Request $request) {
 
@@ -32,6 +30,9 @@ class UserController extends Controller
             $email = $data['email'];
             $password = $data['password'];
             $user = User::where('email', $email)->firstOrFail();
+            if(!$user) {
+                $user = User::where('name', $email)->firstOrFail();
+            }
 
             if ($user) {
                 if ($user->password==$password) {
@@ -52,12 +53,13 @@ class UserController extends Controller
         if ($user->is_admin) {
             $request->session()->put(ADMIN_KEY_ID, $user->id);
         }
+        $user->save();//update
     }
 
     public function logout(Request $request) {
         $request->session()->forget(USER_KEY_ID);
         $request->session()->forget(ADMIN_KEY_ID);
-        return $this->redirectHome();
+        return $this->getLogin($request);
     }
 
     public function postRegister(Request $request) {
@@ -80,7 +82,7 @@ class UserController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|max:255',
             'password' => 'required|string|min:6',
         ]);
     }
@@ -98,7 +100,10 @@ class UserController extends Controller
                         ->orWhere('name', 'like', "%$keyword%")
                         ->get();
         }
-        return View::make('admin.user', ['users'=>$users]);
+        return View::make('admin.user', [
+            'keyword'=>$keyword,
+            'users'=>$users,
+        ]);
     }
 
     public function detail(Request $request) {

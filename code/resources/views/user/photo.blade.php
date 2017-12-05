@@ -47,8 +47,10 @@
                                     <img src="{{$speaker->avatar}}" alt="..." class="img-post2">
                                 </div><!-- /.pull-left -->
                                 <div class="media-body">
+                                    <small class="h4 block text-muted">{{$comment->content}}</small>
+                                    <br/>
                                     <a href="#" class="h4">{{$speaker->name}}</a>
-                                    <small class="block text-muted">{{$comment->content}}</small>
+
                                     <em class="text-xs text-muted">Posted on <span class="text-danger">{{$comment->created_at}}</span></em>
                                 </div><!-- /.media-body -->
                             </div><!-- /.media -->
@@ -58,7 +60,7 @@
                         </div><!-- /.pull-right -->
                     </div><!-- /.panel-body -->
                     <div class="panel-footer">
-                        <form action="../item/comment" class="form-horizontal">
+                        <form action="../item/comment" class="form-horizontal" method="post">
                             <div class="form-group has-feedback no-margin">
                                 <input type="hidden" name="item_id" value="{{$item->id}}">
                                 <input type="hidden" name="user_id" value="{{$user->id}}">

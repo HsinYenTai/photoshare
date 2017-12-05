@@ -24,22 +24,26 @@ class HomeController extends Controller
 
     public function index(Request $request) {
         $user_id = $request->session()->get(USER_KEY_ID);
+        if (!$user_id) {
+            return $this->getLogin($request);
+        }
         $user = User::find($user_id);
-        $albums = Album::where('owner_id', $user_id)->get();
-        $items = Item::where('owner_id', $user_id)->get();
-        $friends = Watch::where('watcher_id', $user_id)->get();
+        $albums = Album::where('owner_id', $user_id)->latest()->get();
+        $items = Item::where('owner_id', $user_id)->latest()->get();
+        $friends = Watch::where('watcher_id', $user_id)->latest()->get();
         $friendsId = [];
         foreach ($friends as $friend) { $friendsId[] = $friend->watched_id; }
         $recommend = empty($friendsId)? [] : Item::whereIn('owner_id', $friendsId)->take(20)->get();
         if ($request->get('album_id')) {
-            $moments = Item::where('album_id', $request->get('album_id'))->get();
+            $moments = Item::where('album_id', $request->get('album_id'))->latest()->get();
         } else if ($request->get('keyword')) {
             $keyword = $request->get('keyword');
             $moments = Item::where('label', 'like', "%$keyword%")
                                 ->orWhere('description', 'like', "%$keyword%")
+                                ->latest()
                                 ->get();
         } else {
-            $moments = Item::paginate(50)->or;
+            $moments = Item::where('created_at', '>=', $user->updated_at)->latest()->get();
         }
 
         $activities = Activity::where('date', '>=', date('c'))->get(); // 'c' means iso

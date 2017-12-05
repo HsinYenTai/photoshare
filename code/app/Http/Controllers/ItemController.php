@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Item;
+use App\Album;
 use App\ItemLike;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,13 +25,19 @@ class ItemController extends Controller
         $data = $request->all();
         if (is_array($saveResult)) {
             dump($saveResult);
-            exit();
+        } else{
+            $data['url'] = $saveResult;
+            $data['owner_id'] =
+                $request->session()->get(USER_KEY_ID);
+            $album_id = $data['album_id'];
+            if($album_id) {
+                $album = Album::find($album_id);
+                $album->background = $saveResult;
+                $album->save();
+                (new Item())->insert($data);
+            }
         }
 
-        $data['url'] = $saveResult;
-        $data['owner_id'] =
-            $request->session()->get(USER_KEY_ID);
-        (new Item())->insert($data);
         return $this->redirectHome();
     }
 

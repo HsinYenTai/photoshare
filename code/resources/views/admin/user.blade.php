@@ -168,7 +168,7 @@
 <div class="col-md-8 col-md-offset-2">
     <div class="panel rounded shadow">
         <form method="get" action="../user/admin">
-            <input class="form-control input-lg no-border" name="keyword" placeholder="input keyword here">
+            <input class="form-control input-lg no-border" name="keyword" value="{{$keyword}}" placeholder="input keyword here">
             <div class="panel-footer">
                 <input type="submit" value="搜索" class="btn btn-success pull-right mt-5">
                 <ul class="nav nav-pills">
@@ -197,7 +197,7 @@
         </thead>
         <tbody id="list">
         @foreach($users as $user)
-        <form action="../admin/update">
+        <form action="../admin/update" method="post">
             <tr class="narrow-table">
                 <input type="hidden" name="id" value="{{$user->id}}">
                 <td>

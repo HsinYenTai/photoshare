@@ -37,7 +37,7 @@ class AlbumController extends Controller
         return Validator::make($data, [
             'title' => 'required|string|max:255',
             'label' => 'required|string|max:255',
-            'description' => 'required|string|min:6',
+            'description' => 'required|string',
             'owner_id' => 'required|integer'
         ]);
     }

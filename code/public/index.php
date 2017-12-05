@@ -12,6 +12,7 @@ define('LARAVEL_START', microtime(true));
 define('USER_KEY_ID', 'USER_KEY_ID');
 define('ADMIN_KEY_ID', 'ADMIN_KEY_ID');
 define('DEFAULT_USER_ID', 1);
+define('DEFAULT_BACKGROUND', '/storage/pictures/a9401cb0071c1ba6db642cad6901f98c.jpg');
 
 /*
 |--------------------------------------------------------------------------

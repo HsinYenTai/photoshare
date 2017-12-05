@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+Route::get('user/logout', "UserController@logout");
 Route::get('user/login', "UserController@getLogin");
 Route::get('user/postLogin', "UserController@postLogin");
 Route::post('user/login', "UserController@postLogin");
@@ -47,3 +46,6 @@ Route::any('home/index', 'HomeController@index');
 Route::any('home/dump', 'HomeController@dump');
 
 Route::any('watch/watch', 'WatchController@watch');
+Route::get('/', function () {
+    return redirect("home/index");
+});

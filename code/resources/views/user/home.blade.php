@@ -177,7 +177,7 @@
                                     <li>
                                         <div class="btn-group-vertical btn-block">
                                             <a href="../user/me" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Edit Account</a>
-                                            <a href="" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
+                                            <a href="../user/logout" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -242,7 +242,7 @@
                                         <li><a href="#tab-album" data-toggle="tab"><i class="fa fa-fw fa-folder-open-o"></i> <span>Albums</span> <small></small></a></li>
                                     </ul>
                                 </div>
-                                <img  src="https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg" class="img-responsive full-width" alt="cover" style="max-height:200px;">
+                                <img  src="../storage/pictures/72f5ddc0cb4079bbbc1f9063e08a7794.jpg" class="img-responsive full-width" alt="cover" style="max-height:200px;">
                             </div>
                             <ul class="list-unstyled no-padding hidden-sm hidden-xs cover-menu">
                                 <li class="active">
